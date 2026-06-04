@@ -5,7 +5,16 @@ from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 import time
 import random
+import os
+import sys
 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 try:
     with open("highscore.txt", "r+") as f:
         highscore = int(f.read())
@@ -22,11 +31,32 @@ button_y = 550
 button_w = 350
 button_h = 100
 
-apple_img = cv2.imread("assets/apple.png", cv2.IMREAD_UNCHANGED)
-orange_img = cv2.imread("assets/orange.png", cv2.IMREAD_UNCHANGED)
-pineapple_img = cv2.imread("assets/pineapple.png", cv2.IMREAD_UNCHANGED)
-watermelon_img = cv2.imread("assets/watermelon.png", cv2.IMREAD_UNCHANGED)
-strawberry_img = cv2.imread("assets/strawberry.png", cv2.IMREAD_UNCHANGED)
+apple_img = cv2.imread(
+    resource_path("assets/apple.png"),
+    cv2.IMREAD_UNCHANGED
+)
+
+orange_img = cv2.imread(
+    resource_path("assets/orange.png"),
+    cv2.IMREAD_UNCHANGED
+)
+
+pineapple_img = cv2.imread(
+    resource_path("assets/pineapple.png"),
+    cv2.IMREAD_UNCHANGED
+)
+
+watermelon_img = cv2.imread(
+    resource_path("assets/watermelon.png"),
+    cv2.IMREAD_UNCHANGED
+)
+
+strawberry_img = cv2.imread(
+    resource_path("assets/strawberry.png"),
+    cv2.IMREAD_UNCHANGED
+)
+
+
 
 fruit_images = [
     apple_img,
@@ -48,7 +78,9 @@ cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 base_options = python.BaseOptions(
-    model_asset_path='hand_landmarker.task'
+    model_asset_path=resource_path(
+        "hand_landmarker.task"
+    )
 )
 
 options = vision.HandLandmarkerOptions(
