@@ -322,7 +322,7 @@ def draw_restart_button(frame, trail_points):
         angle_end = int(-90 + 360 * progress)
         cv2.ellipse(frame, (cx, cy), axes, 0, -90, angle_end, (100, 255, 100), 3)
 
-    label = "PLAY AGAIN"
+    label = "RETRY (Hover here)"
     (tw, th), _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 2)
     cv2.putText(frame, label, (cx - tw // 2, cy + th // 2),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.9, text_color, 2)
